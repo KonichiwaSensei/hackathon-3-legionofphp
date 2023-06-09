@@ -20,6 +20,16 @@ class OwnerController extends Controller
     
     public function store(Request $request)
     {
+
+        $this->validate($request,[
+            'first_name' => 'required|string',
+            'surname' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'nullable|string',
+            'address' => 'nullable|string',
+        ]);
+
+
         $owner = new Owner();
         $owner->first_name = $request->input('first_name');
         $owner->surname = $request->input('surname');
@@ -32,7 +42,16 @@ class OwnerController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
+    {   
+
+        $this->validate($request,[
+            'first_name' => 'required|string',
+            'surname' => 'required|string',
+            'email' => ['required', 'email', Rule::unique('owners')->ignore($id)],
+            'phone' => 'nullable|string',
+            'address' => 'nullable|string',
+        ]);
+
         $owner = Owner::findOrFail($id);
         $owner->first_name = $request->input('first_name');
         $owner->surname = $request->input('surname');
@@ -65,12 +84,5 @@ class OwnerController extends Controller
     }
    
 }
-
-
-
-
-
-
-
 
 

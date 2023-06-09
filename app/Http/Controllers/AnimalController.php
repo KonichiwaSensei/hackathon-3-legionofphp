@@ -25,6 +25,14 @@ class AnimalController extends Controller
     public function store(Request $request)
     { 
 
+            $this->validate($request,[
+            'name' => 'required|string',
+            'species' => 'required|string',
+            'breed' => 'nullable|string',
+            'age' => 'nullable|integer',
+            'weight' => 'nullable|numeric',
+        ]);
+
            $animal = new Animal();
            $animal->name = $request->input('name');
            $animal->species = $request->input('species');
@@ -38,6 +46,14 @@ class AnimalController extends Controller
 
     public function update(Request $request, $id)
     {
+
+        $this->validate($request,[
+            'name' => 'required|string',
+            'species' => 'required|string',
+            'breed' => 'nullable|string',
+            'age' => 'nullable|integer',
+            'weight' => 'nullable|numeric',
+        ]);
 
 
         $animal = Animal::findOrFail($id);
@@ -73,5 +89,6 @@ public function delete($id)
 
 
 
-}
+}    
 
+   
