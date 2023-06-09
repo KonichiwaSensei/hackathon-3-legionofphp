@@ -19,16 +19,13 @@ class AnimalController extends Controller
 
         $animal = new Animal();
 
-        return view('form', compact('animal'));
+        return view('formanimal', compact('animal'));
     }
 
-    public function store($request)
+    public function store(Request $request)
     { 
 
            $animal = new Animal();
-           $animal->id = $request->input('id');
-           $animal->iamge_id = $request->input('image_id');
-           $animal->owner_id = $request->input('owner_id');
            $animal->name = $request->input('name');
            $animal->species = $request->input('species');
            $animal->breed = $request->input('breed');
@@ -36,17 +33,14 @@ class AnimalController extends Controller
            $animal->weight = $request->input('weight');
            $animal->save();
 
-           return redirect()->route('edit', $animal->id);
+           return redirect()->route('animals.edit', $animal->id);
     }
 
-    public function update($request, $id)
+    public function update(Request $request, $id)
     {
 
 
         $animal = Animal::findOrFail($id);
-        $animal->id = $request->input('id');
-        $animal->iamge_id = $request->input('image_id');
-        $animal->owner_id = $request->input('owner_id');
         $animal->name = $request->input('name');
         $animal->species = $request->input('species');
         $animal->breed = $request->input('breed');
@@ -56,7 +50,7 @@ class AnimalController extends Controller
 
         session()->flash('success_message','the animal was updated');
 
-       return redirect()->route('edit', $animal->id);
+       return redirect()->route('animals.edit', $animal->id);
 }
             
 
@@ -65,7 +59,7 @@ public function edit($id)
 
     $animal = Animal::findOrFail($id);
 
-    return view('form', compact('animal'));
+    return view('formanimal', compact('animal'));
 }
 
 public function delete($id)
@@ -74,7 +68,7 @@ public function delete($id)
     $animal->delete();
     session()->flash('success_message','the animal was deleted');
 
-    return redirect()->route('create');
+    return redirect()->route('animals.create');
 }
 
 

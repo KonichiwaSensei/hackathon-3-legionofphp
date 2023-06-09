@@ -7,54 +7,61 @@ class OwnerController extends Controller
 {
     public function show($owner_id)
     {
-        $owner = Owner::findOrFail($owner_id);
-        
-        return view('owner', compact('owner_id'));
+        $owner = Owner::findOrFail($owner_id); 
+        return view('owner', compact('owner'));
     }
        
     public function create()
     {
-        return view('owner');
+        $owner = new Owner();
+
+        return view('formowner', compact('owner'));
     }
     
     public function store(Request $request)
     {
-       
-        $validatedData = $request->validate([
-            'first_name' => 'required',
-            'surname' => 'required',
-            'email' => 'email',
-            'phone' => 'string',
-            'address' => 'string',
-        ]);
+        $owner = new Owner();
+        $owner->first_name = $request->input('first_name');
+        $owner->surname = $request->input('surname');
+        $owner->email = $request->input('email');
+        $owner->phone = $request->input('phone');
+        $owner->address = $request->input('address');
+        $owner->save();
         
-        Owner::create($validatedData);
-        return redirect()->route('home')->with('success', 'Owner created successfully.');
+        return redirect()->route('owners.edit', $owner->id);
     }
 
-    public function update(Request $request, Owner $owner_id)
+    public function update(Request $request, $id)
     {
+        $owner = Owner::findOrFail($id);
+        $owner->first_name = $request->input('first_name');
+        $owner->surname = $request->input('surname');
+        $owner->email = $request->input('email');
+        $owner->phone = $request->input('phone');
+        $owner->address = $request->input('address');
+        $owner->save();
         
-        $validatedData = $request->validate([
-            'first_name' => 'required',
-            'surname' => 'required',
-            'email' => 'email',
-            'phone' => 'string',
-            'address' => 'string',
-        ]);
-        
-        $owner->update($validatedData);
-        return redirect()->route('home')->with('success', 'Owner updated successfully.');
+        session()->flash('success_message','the owner was updated');
+
+
+        return redirect()->route('owners.edit', $owner->id);
     }
    
-    public function edit(Owner $owner_id)
+    public function edit($id)
     {
-        return view('owner.edit', compact('owner_id'));
+        $owner = Owner::findOrFail($id);
+
+        return view('formowner', compact('owner'));
     }
 
-    public function delete(Owner $owner_id)
+    public function delete($id)
     {
-        return view('owner.delete', compact('owner_id'));
+        $owner = Owner::findOrFail($id);
+        $owner->delete();
+        
+        session()->flash('success_message','the owner was deleted');
+
+        return redirect()->route('owners.create');
     }
    
 }
