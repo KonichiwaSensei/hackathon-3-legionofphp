@@ -18,4 +18,9 @@ class Animal extends Model
     {
         return $this->belongsTo(Image::class);
     }
+
+    public function visits()
+    {
+        return $this->hasMany(Visit::class);
+    }
 }

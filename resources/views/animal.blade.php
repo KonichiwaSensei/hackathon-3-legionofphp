@@ -7,7 +7,8 @@
     <p>Animal Age: {{$animal->age}}</p>
     <p>Animal Weight: {{$animal->weight}}</p>
    
-
+    <a href="/visits/create/{{$animal->id}}"><button>New Visit</button></a>
+    
 
 @include('html-end')
     
