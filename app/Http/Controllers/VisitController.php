@@ -29,7 +29,7 @@ class VisitController extends Controller
         $visit->report = $request->input('report');
         $visit->save();
         
-        return redirect()->route('visit.edit', $visit->id);
+        return redirect()->route('visits.edit', $visit->id);
     }
 
     public function update(Request $request, $id)
@@ -42,11 +42,12 @@ class VisitController extends Controller
         session()->flash('success_message','the visit was updated');
 
 
-        return redirect()->route('visit.edit', $visit->id);
+        return redirect()->route('visits.edit', $visit->id);
     }
    
     public function edit($id)
     {
+        $animal = Animal::findOrFail($id);
         $visit = Visit::findOrFail($id);
 
         return view('visit', compact('visit'));
@@ -59,6 +60,6 @@ class VisitController extends Controller
         
         session()->flash('success_message','the visit was deleted');
 
-        return redirect()->route('visit.create');
+        return redirect()->route('search');
     }
 }
