@@ -1,5 +1,11 @@
 @include('html-start')
 
+<?php 
+if (!isset($animal)){
+    $animal = $visit->animal;
+}
+?>
+
 @if ($visit->id)
     <form action="{{ route('visits.delete', $visit->id)}}" method="post">
         @method('delete')
