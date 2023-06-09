@@ -18,7 +18,7 @@ class SearchController extends Controller
                 ->leftJoin('images', 'animals.image_id', 'images.id')
                 ->where('name', 'like', '%' . $search_term . '%')
                 ->orderBy('animals.id', 'asc')
-                ->limit(10)
+                // ->limit(10)
                 ->get();
         }
 

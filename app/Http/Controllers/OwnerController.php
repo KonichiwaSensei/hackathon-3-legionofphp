@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Owner;
+use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Validation\Rule as ValidationRule;
 
 class OwnerController extends Controller
 {
@@ -47,7 +49,7 @@ class OwnerController extends Controller
         $this->validate($request,[
             'first_name' => 'required|string',
             'surname' => 'required|string',
-            'email' => ['required', 'email', Rule::unique('owners')->ignore($id)],
+            'email' => ['required', 'email', ValidationRule::unique('owners')->ignore($id)],
             'phone' => 'nullable|string',
             'address' => 'nullable|string',
         ]);
