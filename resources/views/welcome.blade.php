@@ -27,6 +27,9 @@
         <h4>Owner:</h4>
         <li>Full Name: <strong>{{$dog->first_name}} {{$dog->last_name}}</strong></li>
     </ul>
+    <a href="/owners/{{$dog->owner_id}}"><button>Show Owner Info</button></a>
+    <a href="/animals/{{$dog->id}}"><button>Show Dog Info</button></a>
+    
     @endforeach
 
 @endif

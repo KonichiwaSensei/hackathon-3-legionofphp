@@ -22,7 +22,7 @@ class SearchController extends Controller
                 ->get();
         }
 
-
+        
         return view('welcome', [
             'search_term' => $search_term,
             'results' => $results ?? []
