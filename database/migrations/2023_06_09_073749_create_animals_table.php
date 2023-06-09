@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('species');
             $table->string('breed');
-            $table->number('age');
-            $table->number('weight');
+            $table->integer('age');
+            $table->integer('weight');
             $table->timestamps();
         });
     }
