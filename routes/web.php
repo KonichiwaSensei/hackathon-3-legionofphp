@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\Animalcontroller;
 
@@ -16,6 +18,5 @@ use  App\Http\Controllers\Animalcontroller;
 
 
 Route::get('/animals/{animal_id}', [AnimalController::class, 'show'])->name('animal');
-
-
-
+Route::get('/owners/{owner_id}', [OwnerController::class, 'show'])->name('owner');
+Route::get('/', [SearchController::class, 'search'])->name('search');
