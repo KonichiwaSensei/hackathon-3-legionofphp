@@ -15,7 +15,7 @@
 
     @foreach ($results as $dog)
     <ul>
-        <h2 style="text-decoration: underline">Results {{$dog->id}}:</h2>
+        <h2 style="text-decoration: underline">Dog Id: {{$dog->id}}:</h2>
         <h4>Animal:</h4>
         <li>Name: <strong>{{$dog->name}}</strong></li>
         <li>Species: <strong>{{$dog->species}}</strong></li>
@@ -25,7 +25,7 @@
         <h4>Picture:</h4>
         <img src="/images/pets/{{ $dog->path }}" alt="">
         <h4>Owner:</h4>
-        <li>Full Name: <strong>{{$dog->first_name}} {{$dog->last_name}}</strong></li>
+        <li>Full Name: <strong>{{$dog->first_name}} {{$dog->surname}}</strong></li>
     </ul>
     <a href="/owners/{{$dog->owner_id}}"><button>Show Owner Info</button></a>
     <a href="/animals/{{$dog->id}}"><button>Show Dog Info</button></a>
